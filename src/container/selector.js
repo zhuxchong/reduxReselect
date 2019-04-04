@@ -1,10 +1,23 @@
 import { createSelector } from "reselect";
+import { TODO, ALLDONE } from "../constants";
+
 const getData = state => state.list;
-export const getVisibleTodos = createSelector(
+export const getTodo = createSelector(
   getData,
   list => {
-    console.log("list change");
-    return list;
+    const result = list.filter(i => {
+      return i[1] === TODO;
+    });
+    return result;
+  }
+);
+export const getAlldone = createSelector(
+  getData,
+  list => {
+    const result = list.filter(i => {
+      return i[1] === ALLDONE;
+    });
+    return result;
   }
 );
 const testNum = state => state.testdata;

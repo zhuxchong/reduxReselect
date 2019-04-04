@@ -6,17 +6,13 @@ import { TODO, ALLDONE } from "../constants";
 import { Input } from "antd";
 //import { addList } from "../store/actionCreator";
 import { addList, changeStatus, selectTest } from "../store/actionCreator";
-import { getVisibleTodos, getNum } from "./selector";
+import { getNum, getTodo, getAlldone } from "./selector";
 
 const Search = Input.Search;
 const ListArea = props => {
   //console.log(props);
-  const alldone = props.actionList.filter(i => {
-    return i[1] === ALLDONE;
-  });
-  const todo = props.actionList.filter(i => {
-    return i[1] === TODO;
-  });
+  const alldone = props.alldone;
+  const todo = props.todo;
   return (
     <div>
       <Search
@@ -48,7 +44,9 @@ const ListArea = props => {
 
 const mapStateToProps = state => {
   return {
-    actionList: getVisibleTodos(state),
+    //actionList: getVisibleTodos(state),
+    alldone: getAlldone(state),
+    todo: getTodo(state),
     testdata: getNum(state)
   };
 };
